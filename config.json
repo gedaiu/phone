@@ -1,0 +1,18 @@
+{
+  "title": "Bogdan's Phone",
+  "screen": {
+    "width": 320,
+    "height": 480
+  },
+  "colors": {
+    "background": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+    "defaultStates": {
+      "main": { "r": 105, "g": 205, "b": 202, "a": 255 },
+      "active": { "r": 102, "g": 101, "b": 115, "a": 255 }
+    }
+  },
+  "fonts": {
+    "basic": "fonts/remissis sb.ttf"
+  }
+}

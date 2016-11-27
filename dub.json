@@ -1,0 +1,13 @@
+{
+	"name": "phone",
+	"authors": [
+		"Szabo Bogdan"
+	],
+	"dependencies": {
+		"derelict-sdl2": "~>2.0.0",
+		"vibe-d": "~>0.7.30-alpha.4"
+	},
+	"description": "My phone written in D",
+	"copyright": "Copyright © 2016, Szabo Bogdan",
+	"license": "MIT"
+}
