@@ -63,22 +63,25 @@ struct FontList {
 
 auto getWindow(ref PhoneConfig config)
 {
-	auto numdrivers = SDL_GetNumVideoDrivers(); 
+	auto numdrivers = SDL_GetNumVideoDrivers();
 
-  writeln("Drivers count: ", numdrivers); 
+  writeln("Drivers count: ", numdrivers);
 
-  for (int i=0;i<numdrivers;i++) 
-  { 
-    SDL_RendererInfo drinfo; 
-    SDL_GetRenderDriverInfo(i, &drinfo); 
+  for (int i=0;i<numdrivers;i++)
+  {
+    SDL_RendererInfo drinfo;
+    SDL_GetRenderDriverInfo(i, &drinfo);
 
-    writeln("Driver name: ", drinfo.name.fromStringz); 
-  } 
+    writeln("Driver name: ", drinfo.name.fromStringz);
+  }
 
-
-
-	auto win = SDL_CreateWindow(cast(const(char)*) config.title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			config.screen.width, config.screen.height, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+	version(ARM) {
+		auto win = SDL_CreateWindow(cast(const(char)*) config.title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+				config.screen.width, config.screen.height, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
+	} else {
+		auto win = SDL_CreateWindow(cast(const(char)*) config.title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+				config.screen.width, config.screen.height, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
+	}
 
 	enforce(win !is null, "SDL_CreateWindow Error: " ~ SDL_GetError().fromStringz);
 

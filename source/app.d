@@ -9,6 +9,7 @@ import phone.ui.numerickeyboard;
 import phone.ui.mouseEvent;
 
 import std.stdio;
+import std.conv;
 
 import core.thread;
 
@@ -42,9 +43,6 @@ void main()
 
 	auto win = config.getWindow;
 
-	//auto win = SDL_CreateWindow("Test SDL 2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-        //                                   800, 600, SDL_WINDOW_SHOWN);
-
 	auto ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	if (ren is null)
@@ -53,7 +51,7 @@ void main()
 		return;
 	}
 
-	int height = config.screen.height - 350;
+	int height = (config.screen.height * 0.7).to!int;
 	auto keyboard = NumericKeyboard(
 										Position(0, config.screen.height - height),
 										Size(config.screen.width, height),
@@ -88,7 +86,7 @@ void main()
 		SDL_RenderClear(ren);
 
 		keyboard.process(mouseEvent);
-	
+
 		keyboard.render(ren).draw;
 		//Update the screen
 		SDL_RenderPresent(ren);
