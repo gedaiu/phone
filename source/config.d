@@ -39,11 +39,13 @@ struct PhoneScreen
 
 struct FontList {
 	TTF_Font *basic;
+	TTF_Font *small;
 
 	Json src;
 
 	void update() {
 		basic = TTF_OpenFont(cast(const(char)*)src["basic"].to!string, PhoneConfig.local.screen.width / 5);
+		small = TTF_OpenFont(cast(const(char)*)src["small"].to!string, 15);
 
 		enforce(basic !is null, "Unable to create font: " ~ TTF_GetError().fromStringz);
 	}

@@ -5,9 +5,19 @@ import phone.ui.data;
 import std.exception;
 import std.stdio, std.conv, std.string;
 
-struct Text
+class Text
 {
 	string value;
+	TTF_Font *font;
+
+	this() {
+		this.value = "";
+	}
+
+	this(string value) {
+		this.value = value;
+		font = PhoneConfig.local.fonts.basic;
+	}
 
 	TextRender render(SDL_Renderer* render)
 	{
@@ -29,7 +39,7 @@ struct TextRender
 		this.render = render;
 
 		SDL_Color textColor = SDL_Color(255, 255, 255);
-		auto textSurface = TTF_RenderText_Solid(PhoneConfig.local.fonts.basic,
+		auto textSurface = TTF_RenderText_Solid(text.font,
 				text.value.toStringz, textColor);
 
 		enforce(textSurface !is null, "Unable to create text: " ~ TTF_GetError().fromStringz);

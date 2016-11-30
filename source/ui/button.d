@@ -40,7 +40,7 @@ struct ButtonRender
 	Button button;
 	TextRender text;
 
-	this(Button button, SDL_Renderer* render)
+	this(ref Button button, SDL_Renderer* render)
 	{
 		this.render = render;
 		this.button = button;

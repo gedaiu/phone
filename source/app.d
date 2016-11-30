@@ -61,6 +61,12 @@ void main()
 
 	auto mouseEvent = MouseEvent();
 
+	import phone.ui.text;
+	import phone.ui.button;
+	auto text = Button(Position(1, 1), Size(300, 100));
+	text.text = new Text();
+
+
 	while(true)
 	{
 		auto isExit = false;
@@ -87,7 +93,12 @@ void main()
 
 		keyboard.process(mouseEvent);
 
+		text.text.font = PhoneConfig.local.fonts.small;
+		text.text.value = mouseEvent.to!string;
+
+
 		keyboard.render(ren).draw;
+		text.render(ren).draw;
 
 		//Update the screen
 		SDL_RenderPresent(ren);

@@ -36,7 +36,7 @@ struct NumericKeyboard
 				int y = position.y + i * height + border;
 
 				buttons ~= Button(Position(x, y), Size(width - border * 2,
-						height - border * 2), states, Text(index.to!string));
+						height - border * 2), states, new Text(index.to!string));
 				index++;
 			}
 		}
@@ -46,7 +46,7 @@ struct NumericKeyboard
 			int y = position.y + 3 * height + border;
 
       buttons ~= Button(Position(x, y), Size(width - border * 2,
-          height - border * 2), states, Text("0"));
+          height - border * 2), states, new Text("0"));
     }
 
     buttons[9].text.value = "*";
