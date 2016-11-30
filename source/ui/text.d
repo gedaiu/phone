@@ -12,6 +12,7 @@ class Text
 
 	this() {
 		this.value = "";
+		this.font = PhoneConfig.local.fonts.basic;
 	}
 
 	this(string value) {
@@ -38,9 +39,11 @@ struct TextRender
 		this.text = text;
 		this.render = render;
 
+		string str = text.value.length == 0 ? " " : text.value;
+
 		SDL_Color textColor = SDL_Color(255, 255, 255);
 		auto textSurface = TTF_RenderText_Solid(text.font,
-				text.value.toStringz, textColor);
+				str.toStringz, textColor);
 
 		enforce(textSurface !is null, "Unable to create text: " ~ TTF_GetError().fromStringz);
 

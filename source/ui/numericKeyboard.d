@@ -18,6 +18,8 @@ struct NumericKeyboard
 
 	Button[] buttons;
 
+	void delegate(string value) onKeyPress;
+
 	this(Position position, Size size, ColorStates states)
 	{
 		this.position = position;
@@ -35,7 +37,7 @@ struct NumericKeyboard
 				int x = position.x + j * width + border;
 				int y = position.y + i * height + border;
 
-				buttons ~= Button(Position(x, y), Size(width - border * 2,
+				buttons ~= new Button(Position(x, y), Size(width - border * 2,
 						height - border * 2), states, new Text(index.to!string));
 				index++;
 			}
@@ -45,12 +47,22 @@ struct NumericKeyboard
 			int x = position.x + i * width + border;
 			int y = position.y + 3 * height + border;
 
-      buttons ~= Button(Position(x, y), Size(width - border * 2,
+      buttons ~= new Button(Position(x, y), Size(width - border * 2,
           height - border * 2), states, new Text("0"));
     }
 
     buttons[9].text.value = "*";
     buttons[11].text.value = "#";
+
+		foreach(button; buttons) {
+			button.onPress = &this.buttonPressed;
+		}
+	}
+
+	private void buttonPressed(ref Button button) {
+		if(onKeyPress !is null) {
+			onKeyPress(button.text.value);
+		}
 	}
 
 	void process(MouseEvent event) {

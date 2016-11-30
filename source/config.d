@@ -27,6 +27,7 @@ struct PhoneConfig
 
 struct PhoneColors {
 	Color background;
+	Color text;
 
 	ColorStates defaultStates;
 }

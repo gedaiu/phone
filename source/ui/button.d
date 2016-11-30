@@ -8,7 +8,7 @@ import std.stdio;
 public import phone.ui.data;
 public import phone.ui.mouseEvent;
 
-struct Button
+class Button
 {
 	Position position;
 	Size size;
@@ -17,11 +17,34 @@ struct Button
 
 	Text text;
 
+	void delegate(ref Button value) onPress;
+
 	private Color currentColor;
+	private bool pressed = false;
+
+	this(Position position, Size size, ColorStates colorStates) {
+		this.position = position;
+		this.size = size;
+		this.colorStates = colorStates;
+	}
+
+	this(Position position, Size size, ColorStates colorStates, Text text) {
+		this(position, size, colorStates);
+		this.text = text;
+	}
 
 	void process(MouseEvent event) {
 		currentColor = event.position.match(Rect(position, size)) && event.button != MouseButton.None ?
 											colorStates.active : colorStates.main;
+
+		if(event.button == MouseButton.None) {
+			pressed = false;
+		}
+
+		if(event.position.match(Rect(position, size)) && onPress !is null && event.button != MouseButton.None && !pressed) {
+			onPress(this);
+			pressed = true;
+		}
 	}
 
 	ButtonRender render(SDL_Renderer* render)
