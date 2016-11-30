@@ -59,7 +59,7 @@ struct NumericKeyboard
 		}
 	}
 
-	private void buttonPressed(ref Button button) {
+	private void buttonPressed(Button button) {
 		if(onKeyPress !is null) {
 			onKeyPress(button.text.value);
 		}

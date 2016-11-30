@@ -17,7 +17,7 @@ class Button
 
 	Text text;
 
-	void delegate(ref Button value) onPress;
+	void delegate(Button value) onPress;
 
 	private Color currentColor;
 	private bool pressed = false;
