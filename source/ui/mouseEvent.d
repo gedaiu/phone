@@ -29,6 +29,8 @@ void updateFromSdl(ref MouseEvent mouseEvent) {
     mouseEvent.button = MouseButton.None;
   }
 
-  mouseEvent.position.x *= 2;
-  mouseEvent.position.y *= 2;
+  version(ARM) {} else {
+    mouseEvent.position.x *= 2;
+    mouseEvent.position.y *= 2;
+  }
 }

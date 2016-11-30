@@ -13,7 +13,19 @@
     }
   },
   "fonts": {
-    "basic": "fonts/remissis sb.ttf",
-    "small": "fonts/remissis sb.ttf"
+    "basic": {
+      "path": "fonts/remissis sb.ttf",
+      "size": 30
+    },
+
+    "small": {
+      "path": "fonts/BEBAS___.ttf",
+      "size": 15
+    },
+
+    "number": {
+      "path": "fonts/digital-7 (mono).ttf",
+      "size": 20
+    }
   }
 }
