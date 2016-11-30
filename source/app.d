@@ -14,16 +14,16 @@ import core.thread;
 
 shared static this() {
 	// Load the SDL 2 library.
-	DerelictSDL2.load();
+	DerelictSDL2.load(SharedLibVersion(2, 0, 3));
 
 	// Load the SDL2_image library.
 	DerelictSDL2Image.load();
 
 	// Load the SDL2_mixer library.
-	DerelictSDL2Mixer.load();
+	//DerelictSDL2Mixer.load();
 
 	// Load the SDL2_net library.
-	DerelictSDL2Net.load();
+	// DerelictSDL2Net.load();
 
 	// Load the SDL2_ttf library
 	DerelictSDL2ttf.load();
@@ -41,6 +41,9 @@ void main()
 	}
 
 	auto win = config.getWindow;
+
+	//auto win = SDL_CreateWindow("Test SDL 2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+        //                                   800, 600, SDL_WINDOW_SHOWN);
 
 	auto ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 

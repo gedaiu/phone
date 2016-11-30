@@ -63,14 +63,28 @@ struct FontList {
 
 auto getWindow(ref PhoneConfig config)
 {
-	auto win = SDL_CreateWindow(cast(const(char)*) config.title, 100, 100,
-			config.screen.width, config.screen.height, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
+	auto numdrivers = SDL_GetNumVideoDrivers(); 
+
+  writeln("Drivers count: ", numdrivers); 
+
+  for (int i=0;i<numdrivers;i++) 
+  { 
+    SDL_RendererInfo drinfo; 
+    SDL_GetRenderDriverInfo(i, &drinfo); 
+
+    writeln("Driver name: ", drinfo.name.fromStringz); 
+  } 
+
+
+
+	auto win = SDL_CreateWindow(cast(const(char)*) config.title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+			config.screen.width, config.screen.height, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
 
 	enforce(win !is null, "SDL_CreateWindow Error: " ~ SDL_GetError().fromStringz);
 
 	SDL_GL_GetDrawableSize(win, &config.screen.width, &config.screen.height);
 
-	writeln("w ", config.screen.width, "h ", config.screen.height);
+	writeln("w", config.screen.width, " h", config.screen.height);
 	PhoneConfig.local.fonts.update;
 
 	return win;
