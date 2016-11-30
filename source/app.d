@@ -88,6 +88,7 @@ void main()
 		keyboard.process(mouseEvent);
 
 		keyboard.render(ren).draw;
+
 		//Update the screen
 		SDL_RenderPresent(ren);
 		//Take a quick break after all that hard work

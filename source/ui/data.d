@@ -83,10 +83,15 @@ bool match(Position p, Rect rect) pure {
 	import std.stdio;
 	auto area1 = rect.area;
 
-	return feqrel(area1, area(rect.p1, rect.p2, p) +
-									area(rect.p2, rect.p3, p) +
-									area(rect.p3, rect.p4, p) +
-									area(rect.p4, rect.p1, p)) > 50;
+	if(p.x < rect.position.x || p.y < rect.position.y) {
+		return false;
+	}
+
+	if(p.x > rect.position.x + rect.size.width || p.y > rect.position.y + rect.size.height) {
+		return false;
+	}
+
+	return true;
 }
 
 @("Point matching inside rectangle")
@@ -94,9 +99,11 @@ unittest {
 	import std.stdio;
 
 	auto rect = Rect(Position(5, 5), Size(5, 5));
+	auto rect2 = Rect(Position(3, 147), Size(100, 78));
 
 	assert(!Position(0,0).match(rect));
 	assert(Position(6,6).match(rect));
+	assert(Position(60, 202).match(rect2));
 }
 
 void set(Color color, SDL_Renderer* render)
